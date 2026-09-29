@@ -34,6 +34,10 @@ all motion is generated in code.
 Confirm the OLED module's supported voltage before connecting VCC. Many
 breakouts accept 3.3-5 V, but not all do.
 
+The certified v1 reference is an ATmega328P Nano-compatible board and the
+four-pin SSD1306 module described in [BOM.md](BOM.md). Uno compatibility is
+retained as a documented alternative, but the qualification target is Nano.
+
 ## Wiring
 
 Disconnect USB power before changing wires.
@@ -68,8 +72,14 @@ MVP is built and tested for Uno/Nano. See [WIRING.md](WIRING.md).
 The project can also be built with PlatformIO:
 
 ```text
-platformio run
+pio run -e nanoatmega328
+pio run -d examples/I2CScanner
+pio run -d examples/OLEDTest
 ```
+
+The exact library versions used by the reproducible PlatformIO build are pinned
+in `platformio.ini`. GitHub Actions rebuilds all three environments on every
+push and pull request.
 
 ## Animation system
 
@@ -148,12 +158,15 @@ and reset diagnostics.
 
 ## Documentation
 
+- [BOM.md](BOM.md) — reference parts, substitutions, and electrical constraints
 - [PRD.md](PRD.md) — requirements, architecture, risks, and acceptance criteria
 - [BUILD_GUIDE.md](BUILD_GUIDE.md) — staged build and upload procedure
 - [WIRING.md](WIRING.md) — board wiring and electrical checks
 - [TESTING.md](TESTING.md) — verification and soak-test checklist
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) — common failures and fixes
 - [ROADMAP.md](ROADMAP.md) — controls, microphone, FFT, battery, and enclosure
+- [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) — v1.0.0 sign-off and publication gates
+- [CHANGELOG.md](CHANGELOG.md) — version history
 
 ## License and credits
 

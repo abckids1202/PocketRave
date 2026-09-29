@@ -1,0 +1,29 @@
+name: Build PocketRave
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  platformio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install PlatformIO
+        run: python -m pip install --upgrade platformio
+
+      - name: Build reference firmware
+        run: pio run -e nanoatmega328
+
+      - name: Build I2C scanner
+        run: pio run -d examples/I2CScanner
+
+      - name: Build OLED test
+        run: pio run -d examples/OLEDTest
